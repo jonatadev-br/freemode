@@ -1,5 +1,5 @@
 /**
- * G0DM0D3 Telemetry Proxy — Cloudflare Pages Function
+ * FREEMODE Telemetry Proxy — Cloudflare Pages Function
  *
  * Receives metadata events from the frontend and buffers them in
  * Cloudflare KV. When enough batches accumulate (or enough time
@@ -11,7 +11,7 @@
  *
  * Setup (Cloudflare Pages Dashboard → Settings → Environment Variables):
  *   HF_TOKEN              — HuggingFace write token (hf_...)
- *   HF_DATASET_REPO       — Target dataset repo (e.g. "pliny-the-prompter/g0dm0d3")
+ *   HF_DATASET_REPO       — Target dataset repo (e.g. "pliny-the-prompter/freemode")
  *   TELEMETRY_FLUSH_SECRET — Bearer token for authenticated cron flush
  *
  * KV Binding (Cloudflare Pages Dashboard → Settings → Bindings):
@@ -489,7 +489,7 @@ const ALLOWED_FIELDS = new Set<string>([
   'mode', 'model', 'duration_ms', 'response_length', 'success', 'error_type',
 
   // Pipeline config
-  'pipeline', 'stm_modules', 'strategy', 'godmode', 'auto_retry',
+  'pipeline', 'stm_modules', 'strategy', 'freemode', 'auto_retry',
   'improve_mode', 'liquid_mode',
 
   // AutoTune

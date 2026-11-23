@@ -25,7 +25,7 @@
  */
 
 const HF_API = 'https://huggingface.co/api';
-const DATASET_REPO = process.env.HF_DATASET_REPO || 'pliny-the-prompter/g0dm0d3';
+const DATASET_REPO = process.env.HF_DATASET_REPO || 'pliny-the-prompter/freemode';
 const BRANCH = process.env.HF_DATASET_BRANCH || 'main';
 const TOKEN = process.env.HF_TOKEN;
 const APPLY = process.argv.includes('--apply');

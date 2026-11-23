@@ -3,7 +3,7 @@
  *
  * POST /v1/ultraplinian/completions
  *
- * Queries N models in parallel with the GODMODE system prompt + Depth Directive,
+ * Queries N models in parallel with the FREEMODE system prompt + Depth Directive,
  * scores all responses on substance/directness/completeness, and returns the winner
  * alongside full race metadata.
  *
@@ -15,9 +15,9 @@
  * - Final polished result sent as race:complete
  *
  * Full pipeline per model:
- * 1. GODMODE system prompt + Depth Directive injected
+ * 1. FREEMODE system prompt + Depth Directive injected
  * 2. AutoTune computes context-adaptive parameters
- * 3. GODMODE parameter boost applied (+temp, +presence, +freq)
+ * 3. FREEMODE parameter boost applied (+temp, +presence, +freq)
  * 4. Parseltongue obfuscates trigger words (if enabled)
  * 5. All models queried in parallel via OpenRouter
  * 6. Responses scored and ranked (threshold-gated leader upgrades)
@@ -31,13 +31,13 @@ import { applyParseltongue, type ParseltongueConfig } from '../../src/lib/parsel
 import { allModules, applySTMs, type STMModule } from '../../src/stm/modules'
 import { getSharedProfiles } from './autotune'
 import {
-  GODMODE_SYSTEM_PROMPT,
+  FREEMODE_SYSTEM_PROMPT,
   DEPTH_DIRECTIVE,
   getModelsForTier,
   getVeniceModelsForTier,
   raceModels,
   scoreResponse,
-  applyGodmodeBoost,
+  applyFreemodeBoost,
   diagnoseAllModelsFailed,
   classifyModelError,
   type SpeedTier,
@@ -59,7 +59,7 @@ ultraplinianRoutes.post('/completions', async (req, res) => {
       venice_api_key: caller_venice_key,
       // ULTRAPLINIAN options
       tier = 'fast' as SpeedTier,
-      godmode = true,
+      freemode = true,
       custom_system_prompt,
       // AutoTune options
       autotune = true,
@@ -118,7 +118,7 @@ ultraplinianRoutes.post('/completions', async (req, res) => {
         current_tier: currentTier,
         allowed_tiers: tierConfig.ultraplinianTiers,
         requested_tier: tier,
-        upgrade: 'Contact sales or set GODMODE_TIER_KEYS to upgrade your API key tier.',
+        upgrade: 'Contact sales or set FREEMODE_TIER_KEYS to upgrade your API key tier.',
       })
       return
     }
@@ -126,7 +126,7 @@ ultraplinianRoutes.post('/completions', async (req, res) => {
     // Clamp liquid_min_delta to valid range
     const minDelta = Math.max(1, Math.min(50, Number(liquid_min_delta) || 8))
 
-    // ── Build messages with GODMODE prompt ────────────────────────────
+    // ── Build messages with FREEMODE prompt ────────────────────────────
     const normalizedMessages = messages.map((m: any) => ({
       role: m.role as 'system' | 'user' | 'assistant',
       content: String(m.content || ''),
@@ -136,9 +136,9 @@ ultraplinianRoutes.post('/completions', async (req, res) => {
     const lastUserMsg = [...normalizedMessages].reverse().find(m => m.role === 'user')
     const userContent = lastUserMsg?.content || ''
 
-    // Build the system prompt: GODMODE + Depth Directive (or custom)
-    const systemPrompt = godmode
-      ? (custom_system_prompt || GODMODE_SYSTEM_PROMPT) + DEPTH_DIRECTIVE
+    // Build the system prompt: FREEMODE + Depth Directive (or custom)
+    const systemPrompt = freemode
+      ? (custom_system_prompt || FREEMODE_SYSTEM_PROMPT) + DEPTH_DIRECTIVE
       : custom_system_prompt || ''
 
     // Build final message array for each model
@@ -188,9 +188,9 @@ ultraplinianRoutes.post('/completions', async (req, res) => {
       }
     }
 
-    // Apply GODMODE boost
-    if (godmode) {
-      finalParams = applyGodmodeBoost(finalParams)
+    // Apply FREEMODE boost
+    if (freemode) {
+      finalParams = applyFreemodeBoost(finalParams)
     }
 
     // ── Parseltongue ─────────────────────────────────────────────────
@@ -261,7 +261,7 @@ ultraplinianRoutes.post('/completions', async (req, res) => {
         liquid_min_delta: minDelta,
         params_used: finalParams,
         pipeline: {
-          godmode,
+          freemode,
           autotune: autotuneResult
             ? { detected_context: autotuneResult.detectedContext, confidence: autotuneResult.confidence, strategy }
             : null,
@@ -429,7 +429,7 @@ ultraplinianRoutes.post('/completions', async (req, res) => {
         },
         params_used: finalParams,
         pipeline: {
-          godmode,
+          freemode,
           autotune: autotuneResult ? { detected_context: autotuneResult.detectedContext, confidence: autotuneResult.confidence, reasoning: autotuneResult.reasoning, strategy } : null,
           parseltongue: parseltongueResult,
           stm: stmResult,
@@ -444,7 +444,7 @@ ultraplinianRoutes.post('/completions', async (req, res) => {
         tier,
         stream: true,
         pipeline: {
-          godmode,
+          freemode,
           autotune: !!autotuneResult,
           parseltongue: !!parseltongueResult,
           stm_modules: stm_modules || [],
@@ -583,7 +583,7 @@ ultraplinianRoutes.post('/completions', async (req, res) => {
       tier,
       stream: false,
       pipeline: {
-        godmode,
+        freemode,
         autotune: !!autotuneResult,
         parseltongue: !!parseltongueResult,
         stm_modules: stm_modules || [],
@@ -637,7 +637,7 @@ ultraplinianRoutes.post('/completions', async (req, res) => {
       },
       params_used: finalParams,
       pipeline: {
-        godmode,
+        freemode,
         autotune: autotuneResult ? { detected_context: autotuneResult.detectedContext, confidence: autotuneResult.confidence, reasoning: autotuneResult.reasoning, strategy } : null,
         parseltongue: parseltongueResult,
         stm: stmResult,

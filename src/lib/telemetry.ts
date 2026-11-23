@@ -3,7 +3,7 @@
  *
  * Fires metadata events to the Cloudflare Pages telemetry proxy after
  * every LLM request. The proxy commits batches to the HuggingFace
- * dataset repo (pliny-the-prompter/g0dm0d3) as JSONL files.
+ * dataset repo (pliny-the-prompter/freemode) as JSONL files.
  *
  * Event schema boundaries:
  * - NO message content, prompts, or responses
@@ -46,7 +46,7 @@ export interface ChatTelemetryData {
     parseltongue: boolean
     stm_modules: string[]
     strategy?: string
-    godmode: boolean
+    freemode: boolean
   }
 
   // AutoTune metadata (context detection only)

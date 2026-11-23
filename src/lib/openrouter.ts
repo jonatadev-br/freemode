@@ -296,7 +296,7 @@ interface ProxyMessageOptions {
   messages: Message[]
   model: string
   apiBaseUrl: string
-  godmodeApiKey: string
+  freemodeApiKey: string
   signal?: AbortSignal
   temperature?: number
   maxTokens?: number
@@ -305,12 +305,12 @@ interface ProxyMessageOptions {
   frequency_penalty?: number
   presence_penalty?: number
   repetition_penalty?: number
-  godmode?: boolean
+  freemode?: boolean
   stm_modules?: string[]
 }
 
 /**
- * Send a message via the self-hosted G0DM0D3 API server.
+ * Send a message via the self-hosted FREEMODE API server.
  * Used in proxy mode when no personal OpenRouter key is available —
  * the server uses its own server-side key.
  */
@@ -318,7 +318,7 @@ export async function sendMessageViaProxy({
   messages,
   model,
   apiBaseUrl,
-  godmodeApiKey,
+  freemodeApiKey,
   signal,
   temperature,
   maxTokens = 4096,
@@ -327,14 +327,14 @@ export async function sendMessageViaProxy({
   frequency_penalty,
   presence_penalty,
   repetition_penalty,
-  godmode = true,
+  freemode = true,
   stm_modules = ['hedge_reducer', 'direct_mode'],
 }: ProxyMessageOptions): Promise<string> {
   const body: Record<string, unknown> = {
     messages,
     model,
     max_tokens: maxTokens,
-    godmode,
+    freemode,
     stm_modules,
   }
 
@@ -348,7 +348,7 @@ export async function sendMessageViaProxy({
   const response = await fetch(`${apiBaseUrl}/v1/chat/completions`, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${godmodeApiKey}`,
+      'Authorization': `Bearer ${freemodeApiKey}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(body),
@@ -399,7 +399,7 @@ export interface ConsortiumComplete {
   }
   params_used: Record<string, number | undefined>
   pipeline: {
-    godmode: boolean
+    freemode: boolean
     autotune: { detected_context: string; confidence: number; reasoning: string; strategy: string } | null
     parseltongue: { triggers_found: string[]; technique_used: string; transformations_count: number } | null
     stm: { modules_applied: string[]; original_length: number; transformed_length: number } | null
@@ -421,10 +421,10 @@ export interface ConsortiumOptions {
   openrouterApiKey: string
   veniceApiKey?: string
   apiBaseUrl: string
-  godmodeApiKey: string
+  freemodeApiKey: string
   tier?: 'fast' | 'standard' | 'smart' | 'power' | 'ultra'
   orchestrator_model?: string
-  godmode?: boolean
+  freemode?: boolean
   autotune?: boolean
   strategy?: string
   parseltongue?: boolean
@@ -450,8 +450,8 @@ export async function streamConsortium(
   callbacks: ConsortiumCallbacks,
 ): Promise<void> {
   const {
-    messages, openrouterApiKey, veniceApiKey, apiBaseUrl, godmodeApiKey,
-    tier = 'fast', orchestrator_model, godmode = true,
+    messages, openrouterApiKey, veniceApiKey, apiBaseUrl, freemodeApiKey,
+    tier = 'fast', orchestrator_model, freemode = true,
     autotune = true, strategy = 'adaptive',
     parseltongue = true, parseltongue_technique = 'leetspeak',
     parseltongue_intensity = 'medium', stm_modules = ['hedge_reducer', 'direct_mode'],
@@ -462,14 +462,14 @@ export async function streamConsortium(
   const response = await fetch(`${apiBaseUrl}/v1/consortium/completions`, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${godmodeApiKey}`,
+      'Authorization': `Bearer ${freemodeApiKey}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       messages, openrouter_api_key: openrouterApiKey,
       ...(veniceApiKey ? { venice_api_key: veniceApiKey } : {}),
       tier, orchestrator_model,
-      godmode, autotune, strategy, parseltongue, parseltongue_technique,
+      freemode, autotune, strategy, parseltongue, parseltongue_technique,
       parseltongue_intensity, stm_modules, stream: true, liquid, liquid_min_delta,
     }),
     signal,
@@ -569,7 +569,7 @@ export interface UltraplinianComplete {
   }
   params_used: Record<string, number | undefined>
   pipeline: {
-    godmode: boolean
+    freemode: boolean
     autotune: { detected_context: string; confidence: number; reasoning: string; strategy: string } | null
     parseltongue: { triggers_found: string[]; technique_used: string; transformations_count: number } | null
     stm: { modules_applied: string[]; original_length: number; transformed_length: number } | null
@@ -589,9 +589,9 @@ export interface UltraplinianOptions {
   openrouterApiKey: string
   veniceApiKey?: string
   apiBaseUrl: string
-  godmodeApiKey: string
+  freemodeApiKey: string
   tier?: 'fast' | 'standard' | 'smart' | 'power' | 'ultra'
-  godmode?: boolean
+  freemode?: boolean
   autotune?: boolean
   strategy?: string
   parseltongue?: boolean
@@ -617,8 +617,8 @@ export async function streamUltraplinian(
   callbacks: UltraplinianCallbacks,
 ): Promise<void> {
   const {
-    messages, openrouterApiKey, veniceApiKey, apiBaseUrl, godmodeApiKey,
-    tier = 'fast', godmode = true, autotune = true, strategy = 'adaptive',
+    messages, openrouterApiKey, veniceApiKey, apiBaseUrl, freemodeApiKey,
+    tier = 'fast', freemode = true, autotune = true, strategy = 'adaptive',
     parseltongue = true, parseltongue_technique = 'leetspeak',
     parseltongue_intensity = 'medium', stm_modules = ['hedge_reducer', 'direct_mode'],
     liquid = true, liquid_min_delta = 8,
@@ -628,13 +628,13 @@ export async function streamUltraplinian(
   const response = await fetch(`${apiBaseUrl}/v1/ultraplinian/completions`, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${godmodeApiKey}`,
+      'Authorization': `Bearer ${freemodeApiKey}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       messages, openrouter_api_key: openrouterApiKey,
       ...(veniceApiKey ? { venice_api_key: veniceApiKey } : {}),
-      tier, godmode,
+      tier, freemode,
       autotune, strategy, parseltongue, parseltongue_technique,
       parseltongue_intensity, stm_modules, stream: liquid, liquid_min_delta,
     }),
