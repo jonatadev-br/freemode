@@ -117,7 +117,7 @@ export const ULTRAPLINIAN_MODELS = {
     'google/gemini-3.1-pro-preview',                    // Frontier SWE + reasoning, 1M ctx
     'moonshotai/kimi-k2',                               // 1T MoE instruct, tool-use
   ],
-  // 🔱 ULTRA TIER (+7 models = 60 cumulative): Maximum coverage
+  // ⚡ ULTRA TIER (+7 models = 60 cumulative): Maximum coverage
   ultra: [
     'anthropic/claude-opus-4.8-fast',                   // Fastest Opus, high-throughput
     'anthropic/claude-opus-4',                          // Previous Opus flagship
@@ -183,7 +183,7 @@ export const VENICE_MODELS = {
     'grok-4-20',                            // Venice exclusive — extended Grok
     'nvidia-nemotron-3-ultra-550b-a55b',    // Venice exclusive — 550B beast
   ],
-  // 🔱 ULTRA: maximum coverage + Venice pro variants
+  // ⚡ ULTRA: maximum coverage + Venice pro variants
   ultra: [
     'claude-opus-4-8-fast',                 // = anthropic/claude-opus-4.8-fast
     'hermes-3-llama-3.1-405b',              // = nousresearch/hermes-3-llama-3.1-405b

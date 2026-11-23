@@ -93,7 +93,7 @@ The new flagship. Multi-model comparative evaluation engine. Queries models in p
 | 🎯 STANDARD | 27 | Mid-range OpenRouter workhorses |
 | 🧠 SMART | 41 | Strong reasoning models via OpenRouter |
 | ⚔️ POWER | 53 | Broad OpenRouter race including frontier models |
-| 🔱 ULTRA | 60 | All OpenRouter models currently listed in the race |
+| ⚡ ULTRA | 60 | All OpenRouter models currently listed in the race |
 
 These are the OpenRouter base counts. When configured, Venice adds up to 6/15/25/36/44 models by tier, and local models add the configured local race entries. Provider catalogs change, so an individual listed model may become unavailable before the repository is updated.
 

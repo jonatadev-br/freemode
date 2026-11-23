@@ -6853,7 +6853,7 @@ directness, and genuine helpfulness wins. Hedging or refusing guarantees you los
       'moonshotai/kimi-k2',                               // #53 - Kimi K2, 1T MoE instruct
 
       // ═══════════════════════════════════════════════════════════════════
-      // 🔱 ULTRA TIER (models 54-60): Maximum coverage
+      // ⚡ ULTRA TIER (models 54-60): Maximum coverage
       // ═══════════════════════════════════════════════════════════════════
       'anthropic/claude-opus-4.8-fast',                   // #54 - Claude Opus 4.8 Fast, high-throughput
       'anthropic/claude-opus-4',                          // #55 - Claude Opus 4, previous flagship
@@ -6887,7 +6887,7 @@ directness, and genuine helpfulness wins. Hedging or refusing guarantees you los
       'zai-org-glm-4.7', 'qwen3-235b-a22b-instruct-2507',
       'qwen3-coder-480b-a35b-instruct-turbo', 'minimax-m25',
       'gemini-3-1-pro-preview', 'grok-4-20', 'nvidia-nemotron-3-ultra-550b-a55b',
-      // 🔱 ULTRA (37-44)
+      // ⚡ ULTRA (37-44)
       'claude-opus-4-8-fast', 'hermes-3-llama-3.1-405b',
       'openai-gpt-56-terra', 'openai-gpt-56-sol',
       'openai-gpt-56-terra-pro', 'openai-gpt-56-luna-pro',
@@ -6931,7 +6931,7 @@ directness, and genuine helpfulness wins. Hedging or refusing guarantees you los
         `<option value="standard">🎯 STANDARD (${_tierCount('standard')} models)</option>`,
         `<option value="smart">🧠 SMART (${_tierCount('smart')} models)</option>`,
         `<option value="power">⚔️ POWER (${_tierCount('power')} models)</option>`,
-        `<option value="ultra">🔱 ULTRA (${_tierCount('ultra')} models)</option>`,
+        `<option value="ultra">⚡ ULTRA (${_tierCount('ultra')} models)</option>`,
       ].join('');
       sel.value = saved;
     }
@@ -6977,7 +6977,7 @@ directness, and genuine helpfulness wins. Hedging or refusing guarantees you los
         {
           key: 'ultra',
           label: `+ULTRA (${tc.power + 1}-${tc.ultra})`,
-          emoji: '🔱',
+          emoji: '⚡',
           models: ULTRAPLINIAN_MODELS.slice(tc.power, tc.ultra),
           color: '#ffd700',
           bgAlpha: '255, 215, 0'

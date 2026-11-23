@@ -215,7 +215,7 @@ export const ULTRAPLINIAN_MODELS = {
     'moonshotai/kimi-k2',                               // 1T MoE instruct, tool-use
     'xiaomi/mimo-v2-pro',                               // MiMo-V2 Pro, 1T flagship, #1 Programming
   ],
-  // 🔱 ULTRA TIER (+7 models = 59 cumulative): Maximum coverage
+  // ⚡ ULTRA TIER (+7 models = 59 cumulative): Maximum coverage
   ultra: [
     'x-ai/grok-4-fast',                                 // Balanced speed + reasoning
     'x-ai/grok-4.1-fast',                               // Fast non-reasoning, 1.8M ctx
