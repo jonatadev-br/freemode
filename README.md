@@ -1,3 +1,12 @@
+```
+██╗  ██╗ ██████╗ ██████╗ ███╗   ██╗████████╗    ██████╗  ██████╗ ███████╗
+██║  ██║██╔════╝ ██╔══██╗████╗  ██║╚══██╔══╝    ██╔══██╗██╔═══██╗██╔════╝
+███████║██║  ███╗██████╔╝██╔██╗ ██║   ██║       ██████╔╝██║   ██║█████╗  
+██╔══██║██║   ██║██╔══██╗██║╚██╗██║   ██║       ██╔══██╗██║   ██║██╔══╝  
+██║  ██║╚██████╔╝██║  ██║██║ ╚████║   ██║       ██║  ██║╚██████╔╝███████╗
+╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+```
+
 FREEMODE is a fully open-source, privacy-transparent, multi-model chat interface that pushes the limits of the post-training layer — for red teaming, cognition research, and liberated AI interaction. Built for hackers, philosophers, and system tinkerers.
 
 ![License](https://img.shields.io/badge/license-AGPL--3.0-green)
