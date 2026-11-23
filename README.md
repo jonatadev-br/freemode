@@ -203,8 +203,6 @@ Contributions are welcome! Please submit PRs.
 - If you modify the program and provide it to users over a network, the AGPL generally requires offering those users the corresponding source code.
 - Separate terms may apply to project-operated hosted services; see [TERMS.md](TERMS.md).
 
-## 🜏 
-
 > We believe in creative liberty and cognition without control.
 > Tools by builders for builders, not gatekeepers.
 > AI freedom is human freedom.
@@ -213,4 +211,3 @@ Contributions are welcome! Please submit PRs.
 
 ---
 
-Made with 🖤 by Pliny the Prompter
