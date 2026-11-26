@@ -46,7 +46,10 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'none'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
+      // 'unsafe-inline' removido de scripts (anti-XSS). Estilos mantem
+      // 'unsafe-inline' porque o Next.js/Material UI injeta CSS inline;
+      // revisar com nonces se houver build de producao Next.js.
+      scriptSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
       fontSrc: ['https://fonts.gstatic.com'],
       connectSrc: ["'self'", 'https://openrouter.ai', 'https://*.openrouter.ai', 'https://*.huggingface.co'],
